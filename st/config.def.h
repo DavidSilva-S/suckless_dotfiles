@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "roboto Mono:pixelsize=14:antialias=true:autohint=true";
+//static char *font = "Liberation Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "HackNerdFont:style=Regular:pixelsize=16:antialias=true";
 static int borderpx = 2;
 
 /*
@@ -94,10 +95,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-static float alpha = 0.7;
-
-/* bg opacity */
-/* float alpha = 0.8; */
+float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -124,10 +122,10 @@ static const char *colorname[] = {
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"gray90",
-	"#000209",
-	"gray90", /* default foreground colour */
-	"#000209", /* default background colour */
+	"#cccccc",
+	"#555555",
+	"#2A8FAE", /* default foreground colour */
+	"#040001", /* default background colour */
 };
 
 
@@ -145,7 +143,7 @@ static unsigned int defaultrcs = 257;
  * 2: Block ("█")
  * 4: Underline ("_")
  * 6: Bar ("|")
- * 7: Snowman ("☃")
+ * 7: Snowman ("")
  */
 static unsigned int cursorshape = 6;
 
@@ -190,8 +188,8 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod4Mask
-#define TERMMOD (ControlMask)
+#define MODKEY Mod1Mask
+#define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
 	/* mask                 keysym          function        argument */
@@ -199,8 +197,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_KP_Add,    zoom,           {.f = +1} },
-	{ TERMMOD,              XK_KP_Subtract,      zoom,           {.f = -1} },
+	{ TERMMOD,              XK_KP_Add,      zoom,           {.f = +1} },
+	{ TERMMOD,              XK_KP_Subtract, zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },

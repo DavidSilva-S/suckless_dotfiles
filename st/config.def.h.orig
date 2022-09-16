@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "roboto Mono:pixelsize=14:antialias=true:autohint=true";
+//static char *font = "Liberation Mono:pixelsize=14:antialias=true:autohint=true";
+static char *font = "HackNerdFont:style=Regular:pixelsize=16:antialias=true";
 static int borderpx = 2;
 
 /*
@@ -93,9 +94,6 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* bg opacity */
-static float alpha = 0.8;
-
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
@@ -144,7 +142,7 @@ static unsigned int defaultrcs = 257;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 4;
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers
@@ -187,7 +185,7 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
@@ -197,7 +195,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
 	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_KP_Add,      zoom,           {.f = -1} },
+	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
