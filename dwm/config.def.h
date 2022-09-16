@@ -21,6 +21,11 @@ static const char col_rich_black_fogra_39[] = "#02050C";
 static const char col_rich_black_fogra_29[] = "#082E69";
 static const char col_green_blue[] = "#2F68A4";
 
+/*them dark purple*/
+static const char purple[] = "#6F20A5";
+static const char blue_munsell[] = "#2A8FAE";
+
+/*color default*/
 static const char col_gray1[]       = "#000001";
 static const char col_gray2[]       = "#444444"; 
 static const char col_gray4[]       = "#2F68A4";
@@ -31,8 +36,8 @@ static const char col_white[]       = "#bbbbbb";
  
 static const char *colors[][3]      = {
 	/*             fg           bg                       border   */
-	[SchemeNorm] = { col_white, col_rich_black_fogra_39, col_rich_black_fogra_39 },
-	[SchemeSel]  = { col_white, col_rich_black_fogra_29,    col_rich_black_fogra_29},
+	[SchemeNorm] = { blue_munsell, col_rich_black_fogra_39, col_rich_black_fogra_39 },
+	[SchemeSel]  = { blue_munsell, purple,                  purple},
 };
  
 //static const unsigned int alphas[][3]      = {
@@ -76,14 +81,17 @@ static const char *downvol[] = { "/usr/bin/pactl", "set-sink-volume", "0", "-5%"
 static const char *mutevol[] = { "/usr/bin/pactl", "set-sink-mute",   "0", "toggle",  NULL };
 
 /* Brightness control */
-static const char *brinc[] = { "/usr/bin/xbacklight", "-inc","5%", NULL };
-static const char *brdec[] = { "/usr/bin/xbacklight", "-dec", "5%", NULL };
+static const char *brinc[] = { "/usr/bin/light", "-A", "5", NULL };
+static const char *brdec[] = { "/usr/bin/light", "-U", "5", NULL };
 
+#include "fibonacci.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+ 	{ "[@]",      spiral },
+ 	{ "[\\]",      dwindle },
 };
 
 /* key definitions */
@@ -125,6 +133,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -146,10 +156,10 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-	{ 0,                            XF86XK_AudioMute, spawn, {.v = mutevol } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+	{ MODKEY|ShiftMask,             XK_q,                      quit,           {0} },
+	{ 0,                            XF86XK_AudioLowerVolume,   spawn, {.v = downvol } },
+	{ 0,                            XF86XK_AudioMute,          spawn, {.v = mutevol } },
+	{ 0,                            XF86XK_AudioRaiseVolume,   spawn, {.v = upvol   } },
 	{ 0,                            XF86XK_MonBrightnessUp,    spawn,          {.v = brinc} },
         { 0,                            XF86XK_MonBrightnessDown,  spawn,          {.v = brdec} },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
